@@ -1,4 +1,4 @@
-<?php
+/<?php
 namespace App\Http\Controllers\Auth;
 use Mail;
 use App\Mail\verificaCorreoToken;
@@ -91,11 +91,16 @@ class UsuariosRegistroController extends Controller
     public function enviarCorreoListo($correo, $emailtoken){
         $usuario = Usuario::where(['correo'=>$correo, 'emailtoken'=>$emailtoken ])->first();
         if ($usuario) {
-            return Usuario::where(['correo'=>$correo, 'emailtoken'=>$emailtoken ])->update(['verficado'=>'1', 'emailtoken'=>NULL]);
+            Usuario::where(['correo'=>$correo, 'emailtoken'=>$emailtoken ])->update(['verficado'=>'1', 'emailtoken'=>NULL]);
+            return view('')->
+         }else{
+            return view('')
          }
     }
 
     public function verificarEmailPrimero(){
         return view('email.verificaCorreoPrimero');
     }
+
+    
 }

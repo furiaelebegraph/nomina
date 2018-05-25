@@ -29,8 +29,7 @@ class verificaCorreoToken extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
+    public function build(){
         return $this->markdown('email.verificar')->with(['usuario', $this->usuario]);
     }
 }

@@ -43,6 +43,10 @@ Route::prefix('admin')->group(function(){
 });
 
 
+Route::post('usuario_logout', 'UsuariosAuth\LoginController@logout');
+Route::get('usuario_login', 'UsuariosAuth\LoginController@showLoginForm');
+Route::post('usuario_login', 'UsuariosAuth\LoginController@login');
+
 //usuario Routes
 Route::group(['middleware'=> 'usu'],function(){
   Route::resource('usuario','\App\Http\Controllers\UsuarioController');

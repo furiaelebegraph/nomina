@@ -10,6 +10,8 @@ use App\Usuario;
 use Amranidev\Ajaxis\Ajaxis;
 use URL;
 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 /**
  * Class UsuarioController.
  *
@@ -58,32 +60,15 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $usuario = new Usuario();
-
-        
         $usuario->nombre = $request->nombre;
-
-        
         $usuario->correo = $request->correo;
-
-        
         $usuario->password = bcrypt($request->password);
-
-        
         $usuario->telefono = $request->telefono;
-
-        
         $usuario->verificado = 0;
-
-        
         $usuario->direccion = $request->direccion;
-
-
         $usuario->emailtoken = Str::random(40);
-
         $usuario->nss = $request->nss;
 
-        
-        
         $usuario->save();
 
         $pusher = App::make('pusher');
@@ -192,8 +177,7 @@ class UsuarioController extends Controller
      * @param    int $id
      * @return  \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
      	$usuario = Usuario::findOrfail($id);
      	$usuario->delete();
         return URL::to('usuario');
@@ -206,8 +190,7 @@ class UsuarioController extends Controller
        //Redirects sellers
         return redirect($this->redirectPath);
     }
-    protected function guard()
-   {
+    protected function guard(){
        return Auth::guard('usu');
-   }
+    }
 }
